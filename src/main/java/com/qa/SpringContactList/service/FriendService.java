@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.qa.SpringContactList.domain.Friend;
+import com.qa.SpringContactList.exception.FriendNotFoundException;
 import com.qa.SpringContactList.repo.FriendRepo;
 
 @Service
