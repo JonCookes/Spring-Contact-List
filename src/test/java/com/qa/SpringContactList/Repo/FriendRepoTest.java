@@ -16,7 +16,7 @@ class FriendRepoTest {
 	@Test
 	void itShouldDeleteEmployeeById() {
 		//given
-		Friend friend = new Friend(
+		//Friend friend = new Friend(
 				
 		//when
 		//then
