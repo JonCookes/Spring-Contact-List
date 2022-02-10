@@ -37,11 +37,7 @@ public class FriendService {
 		return friendRepo.findFriendById(id).orElseThrow(() -> new FriendNotFoundException("Awww, this person isn't our friend! :("));
 	} //try to find an employee, if you can't, throws exception.
 	
-	public boolean remove(Long id) {
-		this.friendRepo.deleteById(id);;
-		return !this.findFriendById(id);
 		
-	}
 	public Friend deleteFriend(Long id) {  //deletes by id, but the friend repo doesn't have a delete by default so we create a method in repo.
 		Optional<Friend> toDelete = this.friendRepo.findFriendById(id);
 		this.friendRepo.deleteFriendById(id);

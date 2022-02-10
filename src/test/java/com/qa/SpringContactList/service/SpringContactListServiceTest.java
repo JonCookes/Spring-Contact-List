@@ -88,8 +88,9 @@ public class SpringContactListServiceTest {
 		Long id = 1L;
 		Optional<Friend> optFriend = Optional.of(new Friend("Jon", "Jonshotmail", "Jono", "98764", null));
 		Friend friend1 = new Friend(id, "Jon", "Jonshotmail", "Jono", "98764", null);
-		Mockito.when(this.repo.findFriendById(id))
-				.thenReturn(optFriend);
+		
+		Mockito.when(this.repo.findFriendById(id)).thenReturn(optFriend);
+		
 		assertThat(this.service.findFriendById(id)).isEqualTo(friend1);
 		Mockito.verify(this.repo, Mockito.times(1)).findFriendById(id);
 		
@@ -99,10 +100,10 @@ public class SpringContactListServiceTest {
     void testDeleteFriend() {
     	Long id = 1L;
     	Optional<Friend> optFriend = Optional.of(new Friend("Jon", "Jonshotmail", "Jono", "98764", null));
-    	
+    	Friend deleted = optFriend.get();
     	Mockito.when(this.repo.findFriendById(id)).thenReturn(optFriend);
     	
-    	assertThat(this.service.deleteFriend(id)).isEqualTo(optFriend);
+    	assertThat(this.service.deleteFriend(id)).isEqualTo(deleted);
     	Mockito.verify(this.repo, Mockito.times(1)).deleteFriendById(id);
     	
     	
