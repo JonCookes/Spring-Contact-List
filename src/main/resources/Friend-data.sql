@@ -1,0 +1,1 @@
+INSERT INTO `friend` (`alias`, `email`, `friend_code`, `name`, `phone`) VALUES ('56', '56', ?, '56', '56')
