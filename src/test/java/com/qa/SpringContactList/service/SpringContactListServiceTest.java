@@ -87,7 +87,7 @@ public class SpringContactListServiceTest {
 	void testFindFriendById() throws Exception {
 		Long id = 1L;
 		Optional<Friend> optFriend = Optional.of(new Friend("Jon", "Jonshotmail", "Jono", "98764", null));
-		Friend friend1 = new Friend(id, "Jon", "Jonshotmail", "Jono", "98764", null);
+		Friend friend1 = new Friend(null, "Jon", "Jonshotmail", "Jono", "98764", null);
 		
 		Mockito.when(this.repo.findFriendById(id)).thenReturn(optFriend);
 		
