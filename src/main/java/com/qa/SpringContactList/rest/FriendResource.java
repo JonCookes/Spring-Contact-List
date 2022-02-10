@@ -1,4 +1,4 @@
-package com.qa.SpringContactList;
+package com.qa.SpringContactList.rest;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.qa.SpringContactList.domain.Friend;
@@ -44,16 +45,17 @@ public class FriendResource {
 		return new ResponseEntity<>(newFriend, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/update")
-	public ResponseEntity<Friend> updateFriend(@RequestBody Friend friend) {
-		Friend updateFriend = friendService.updateFriend(friend);
-		return new ResponseEntity<>(updateFriend, HttpStatus.OK);
+	@PutMapping("/update/{id}")
+	public ResponseEntity<Friend> updateFriend(@PathVariable("id")Long id, @RequestBody Friend friend) {
+		Friend updateFriend = friendService.updateFriend(id, friend);
+		return new ResponseEntity<Friend>(updateFriend, HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<?> deleteFriend(@PathVariable("id")Long id) {
+	public ResponseEntity<Friend> deleteFriend(@PathVariable Long id) {
 		friendService.deleteFriend(id);
-		return new ResponseEntity<>(HttpStatus.OK);
+		return new ResponseEntity<Friend>(HttpStatus.OK);
 	}
-	
+	 
 }
+	
