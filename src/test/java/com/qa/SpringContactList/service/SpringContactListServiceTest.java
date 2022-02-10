@@ -12,11 +12,13 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.qa.SpringContactList.domain.Friend;
 import com.qa.SpringContactList.repo.FriendRepo;
 
 @SpringBootTest
+@ActiveProfiles("test") 
 public class SpringContactListServiceTest {
 
 	private Friend newFriend;
