@@ -1,4 +1,4 @@
-package com.qa.SpringContactList;
+package com.qa.SpringContactList.rest;
 
 import java.util.List;
 
@@ -44,9 +44,9 @@ public class FriendResource {
 		return new ResponseEntity<>(newFriend, HttpStatus.CREATED);
 	}
 	
-	@PutMapping("/update")
-	public ResponseEntity<Friend> updateFriend(@RequestBody Friend friend) {
-		Friend updateFriend = friendService.updateFriend(friend);
+	@PutMapping("/update/{id}")
+	public ResponseEntity<Friend> updateFriend(@PathVariable("id")Long id, @RequestBody Friend friend) {
+		Friend updateFriend = friendService.updateFriend(id, friend);
 		return new ResponseEntity<>(updateFriend, HttpStatus.OK);
 	}
 	

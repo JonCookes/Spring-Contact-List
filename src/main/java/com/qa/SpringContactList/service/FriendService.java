@@ -22,7 +22,7 @@ public class FriendService {
 	
 	
 	public Friend addFriend(Friend friend) {    //creating the friend in the actual database
-		friend.setFriendCode(UUID.randomUUID().toString());   //but I want to generate the employee code
+		friend.setFriendCode("xoxoxxo!");   //but I want to generate the employee code
 		return friendRepo.save(friend);
 	}
 	
@@ -30,8 +30,15 @@ public class FriendService {
 		return friendRepo.findAll();
 	}
 	
-	public Friend updateFriend(Friend friend) { //updates
-		return friendRepo.save(friend);
+	public Friend updateFriend(Long id, Friend friend) { //updates
+		Optional<Friend> toUpdate = this.friendRepo.findFriendById(id);
+		Friend found = toUpdate.get();
+		found.setName(friend.getName());
+		found.setEmail(friend.getEmail());
+		found.setAlias(friend.getAlias());
+		found.setPhone(friend.getPhone());
+		found.setFriendCode(friend.getFriendCode());
+		return friendRepo.save(found);
 	}
 	public Friend findFriendById(Long id) {
 		return friendRepo.findFriendById(id).orElseThrow(() -> new FriendNotFoundException("Awww, this person isn't our friend! :("));
