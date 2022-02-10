@@ -3,6 +3,8 @@ package com.qa.SpringContactList.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -33,9 +35,8 @@ public class SpringContactListServiceTest {
 	
 	@Test
 	void testAddFriend() {
-		//given (this piece of data)
-		
-		
+		//given (this piece of data)(new friend etc)
+				
 		//when (i call this method and parse this data in)
 		Mockito.when(this.repo.save(newFriend)).thenReturn(savedFriend);
 		
@@ -50,7 +51,13 @@ public class SpringContactListServiceTest {
 	
 	@Test
 	void testUpdateFriend() {
-		
+		//given an id and an object to update
+		Long id = 1L;
+		//new one to update
+		Friend toUpdate = new Friend("Hubert", "HubbyHue@Hue.co.uk", "HuebertQuebert", "987654321", null);
+		Optional<Friend> optFriend = Optional.of(new Friend(null, null, null, null, null, null));
+		//update
+		Friend updated = new Friend(id, toUpdate.getName(), toUpdate.getEmail(), toUpdate.getAlias(), toUpdate.getPhone(), null );
 	}
 
 }
