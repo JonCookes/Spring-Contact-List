@@ -58,6 +58,10 @@ public class SpringContactListServiceTest {
 		Optional<Friend> optFriend = Optional.of(new Friend(null, null, null, null, null, null));
 		//update
 		Friend updated = new Friend(id, toUpdate.getName(), toUpdate.getEmail(), toUpdate.getAlias(), toUpdate.getPhone(), null );
+		//When
+		Mockito.when(this.repo.findById(id)).thenReturn(optFriend);
+		Mockito.when(this.repo.save(null)).thenReturn(upated);
+		
 	}
 
 }
