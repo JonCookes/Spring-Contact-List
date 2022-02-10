@@ -12,11 +12,13 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.qa.SpringContactList.domain.Friend;
 import com.qa.SpringContactList.repo.FriendRepo;
 
 @SpringBootTest
+@ActiveProfiles("test") 
 public class SpringContactListServiceTest {
 
 	private Friend newFriend;
@@ -87,9 +89,10 @@ public class SpringContactListServiceTest {
 	void testFindFriendById() throws Exception {
 		Long id = 1L;
 		Optional<Friend> optFriend = Optional.of(new Friend("Jon", "Jonshotmail", "Jono", "98764", null));
-		Friend friend1 = new Friend(id, "Jon", "Jonshotmail", "Jono", "98764", null);
-		Mockito.when(this.repo.findFriendById(id))
-				.thenReturn(optFriend);
+		Friend friend1 = new Friend(null, "Jon", "Jonshotmail", "Jono", "98764", null);
+		
+		Mockito.when(this.repo.findFriendById(id)).thenReturn(optFriend);
+		
 		assertThat(this.service.findFriendById(id)).isEqualTo(friend1);
 		Mockito.verify(this.repo, Mockito.times(1)).findFriendById(id);
 		
@@ -99,11 +102,11 @@ public class SpringContactListServiceTest {
     void testDeleteFriend() {
     	Long id = 1L;
     	Optional<Friend> optFriend = Optional.of(new Friend("Jon", "Jonshotmail", "Jono", "98764", null));
-    	
+    	Friend deleted = optFriend.get();
     	Mockito.when(this.repo.findFriendById(id)).thenReturn(optFriend);
     	
-    	assertThat(this.service.deleteFriend(id)).isEqualTo(optFriend);
-    	Mockito.verify(this.repo, Mockito.times(1)).deleteFriendById(id);
+    	assertThat(this.service.deleteFriend(id)).isEqualTo(deleted);
+    	Mockito.verify(this.repo, Mockito.times(1)).deleteById(id);
     	
     	
     }
