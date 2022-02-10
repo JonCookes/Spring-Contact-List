@@ -1,7 +1,9 @@
 package com.qa.SpringContactList.rest;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -45,8 +47,32 @@ class SpringContactListControllerTest {
 		//perform the test
 		this.mock.perform(mockRequest).andExpect(matchStatus).andExpect(matchBody);
 		
-		
-
-
+	
+}
+	
+	@Test
+    void testUpdate() throws Exception {
+        Friend updateFriend = new Friend("Jon", "Jonshotmail", "Jono", "98764", null);
+        String updateFriendJSON = this.map.writeValueAsString(updateFriend);
+        Long IdUpdate = 1L;
+        RequestBuilder updateReq = put("/update/" + IdUpdate).contentType(MediaType.APPLICATION_JSON)
+                .content(updateFriendJSON);
+        Friend returnUpdatedFriend = new Friend("Jon", "Jonshotmail", "Jono", "98764", null);
+        String returnUpdatedFriendJSON = this.map.writeValueAsString(returnUpdatedFriend);
+        ResultMatcher retStatus = status().isOk();
+        ResultMatcher retBody = content().json(returnUpdatedFriendJSON);
+        this.mock.perform(updateReq).andExpect(retStatus).andExpect(retBody);
+    }
+	
+	@Test
+    void testDelete() throws Exception {
+        Friend deleteFriend = new Friend("Jon", "Jonshotmail", "Jono", "98764", null);
+        String deleteFriendJSON = this.map.writeValueAsString(deleteFriend);
+       
+        Long remId = 1L;
+        RequestBuilder delRequest = delete("/delete/" + remId);
+        ResultMatcher Status = status().isOk();
+        ResultMatcher Body = content().json(deleteFriendJSON);
+        this.mock.perform(delRequest).andExpect(Status).andExpect(Body);
 }
 }
