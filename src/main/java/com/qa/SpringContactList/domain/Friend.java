@@ -28,7 +28,7 @@ public class Friend implements Serializable { //Helps transform the java class i
 	@Column
 	private String phone;
 	
-	@Column(nullable = false)
+	@Column
 	private String friendCode;
 	
 	//Empty Constructor
