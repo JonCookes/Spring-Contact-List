@@ -95,16 +95,17 @@ public class SpringContactListServiceTest {
 		
 	}
 
-	/*
-	 * @Test void testDeleteFriend() { // given (this piece of data)(new friend etc)
-	 * Long id = 1L; Friend gone = new Friend() // when (i call this method and
-	 * parse this data in)
-	 * Mockito.when(this.repo.save(newFriend)).thenReturn(savedFriend);
-	 * 
-	 * // then (this is what i want it to do
-	 * assertThat(this.service.deleteFriend(id)).isEqualTo(savedFriend);
-	 * 
-	 * // verify Mockito.verify(this.repo, Mockito.times(1)).save(newFriend); }
-	 */
-
+    @Test 
+    void testDeleteFriend() {
+    	Long id = 1L;
+    	Optional<Friend> optFriend = Optional.of(new Friend("Jon", "Jonshotmail", "Jono", "98764", null));
+    	
+    	Mockito.when(this.repo.findFriendById(id)).thenReturn(optFriend);
+    	
+    	assertThat(this.service.deleteFriend(id)).isEqualTo(optFriend);
+    	Mockito.verify(this.repo, Mockito.times(1)).deleteFriendById(id);
+    	
+    	
+    }
+	 
 }
