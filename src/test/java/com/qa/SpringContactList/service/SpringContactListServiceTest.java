@@ -106,7 +106,7 @@ public class SpringContactListServiceTest {
     	Mockito.when(this.repo.findFriendById(id)).thenReturn(optFriend);
     	
     	assertThat(this.service.deleteFriend(id)).isEqualTo(deleted);
-    	Mockito.verify(this.repo, Mockito.times(1)).deleteFriendById(id);
+    	Mockito.verify(this.repo, Mockito.times(1)).deleteById(id);
     	
     	
     }
