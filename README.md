@@ -6,7 +6,7 @@ Prerequistites
 
 In order to run this project, you will nee to have java 17 installed and use the follwoing in your CMD.
 
-dfyjmtgmgh
+djava -jar SpringContactList-0.0.1-SNAPSHOT.jar
 
 Jira Board
 
