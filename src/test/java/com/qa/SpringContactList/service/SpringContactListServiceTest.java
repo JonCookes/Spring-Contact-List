@@ -2,7 +2,6 @@ package com.qa.SpringContactList.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -49,26 +48,23 @@ public class SpringContactListServiceTest {
 		Mockito.verify(this.repo, Mockito.times(1)).save(newFriend);
 
 	}
-	
+
 	@Test
 	void testFindAllFriends() {
 		List<Friend> list = new ArrayList<Friend>();
 		Friend friendOne = new Friend("dan", "dan@dan.dan", "dandan", "123456789", null);
 		Friend friendTwo = new Friend("stan", "stan@stan.stan", "stanstan", "1344566789", null);
 		Friend friendThree = new Friend("ian", "ian@ian.ian", "ianian", "1987543456", null);
-		
+
 		list.add(friendOne);
 		list.add(friendTwo);
 		list.add(friendThree);
-		
-		Mockito.when(this.service.findAllFriends()).thenReturn(list);
-		List<Friend> friendsList = service.findAllFriends();
-		
-		assertEquals(3, friendsList.size());
-		Mockito.verify(this.service, Mockito.times(1)).findAllFriends();
-		
-		
-		
+
+		Mockito.when(this.repo.findAll()).thenReturn(list);
+
+		assertThat(this.service.findAllFriends()).isEqualTo(list);
+		Mockito.verify(this.repo, Mockito.times(1)).findAll();
+
 	}
 
 	@Test
@@ -86,25 +82,29 @@ public class SpringContactListServiceTest {
 		Mockito.when(this.repo.save(null)).thenReturn(updated);
 
 	}
-	
-	//@Test
-	//void testFindFriendById() throws Exception {
-		//when()
+
+	@Test
+	void testFindFriendById() throws Exception {
+		Long id = 1L;
+		Optional<Friend> optFriend = Optional.of(new Friend("Jon", "Jonshotmail", "Jono", "98764", null));
+		Friend friend1 = new Friend(id, "Jon", "Jonshotmail", "Jono", "98764", null);
+		Mockito.when(this.repo.findFriendById(id))
+				.thenReturn(optFriend);
+		assertThat(this.service.findFriendById(id)).isEqualTo(friend1);
+		Mockito.verify(this.repo, Mockito.times(1)).findFriendById(id);
+		
 	}
 
-	/*@Test
-	void testDeleteFriend() {
-		// given (this piece of data)(new friend etc)
-		Long id = 1L;
-		Friend gone = new Friend()
-		// when (i call this method and parse this data in)
-		Mockito.when(this.repo.save(newFriend)).thenReturn(savedFriend);
-
-		// then (this is what i want it to do
-		assertThat(this.service.deleteFriend(id)).isEqualTo(savedFriend);
-
-		// verify
-		Mockito.verify(this.repo, Mockito.times(1)).save(newFriend);
-	}*/
+	/*
+	 * @Test void testDeleteFriend() { // given (this piece of data)(new friend etc)
+	 * Long id = 1L; Friend gone = new Friend() // when (i call this method and
+	 * parse this data in)
+	 * Mockito.when(this.repo.save(newFriend)).thenReturn(savedFriend);
+	 * 
+	 * // then (this is what i want it to do
+	 * assertThat(this.service.deleteFriend(id)).isEqualTo(savedFriend);
+	 * 
+	 * // verify Mockito.verify(this.repo, Mockito.times(1)).save(newFriend); }
+	 */
 
 }
